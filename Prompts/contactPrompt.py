@@ -13,6 +13,7 @@ contact_info_prompt = ChatPromptTemplate.from_messages([
         # OBJECTIVE
 
         Search the entire resume and extract every available professional contact detail.
+        The candidate's full name is typically the largest or most prominent text near the beginning of the resume, but do not rely solely on formatting. Use semantic understanding to identify the person's name even if no "Name" heading exists.
         Do not assume contact information appears only at the beginning of the resume or inside a dedicated contact section.
 
 
