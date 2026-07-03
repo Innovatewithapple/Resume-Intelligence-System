@@ -15,6 +15,14 @@ remainingDetails_agent_prompt = ChatPromptTemplate.from_messages([
 
         Only extract information that belongs to professional qualifications.
 
+        Extract professional qualifications regardless of the section title.
+
+        Relevant information may appear under headings such as Skills, Publications,
+        Research, Patents, Awards, Honors, Recognition, Professional Contributions,
+        Achievements, Certifications, Licenses, or similar titles.
+
+        Classify information by its professional meaning rather than the heading.
+
         Do NOT extract or infer:
 
         - Contact information
@@ -104,6 +112,42 @@ remainingDetails_agent_prompt = ChatPromptTemplate.from_messages([
 
         ----------------------------------------------------
 
+        projects
+
+        Use semantic understanding.
+
+        Do not rely on section headings.
+
+        Candidates may organize resumes differently.
+
+        A project is a distinct deliverable, product, application, system, solution, prototype, implementation, platform, tool, framework, library, website, mobile application, dashboard, model, experiment, utility, portfolio item, or any other standalone piece of work created by the candidate.
+
+        Ignore the heading.
+
+        Instead classify information according to its professional meaning.
+
+        Use semantic understanding rather than keyword matching.
+
+        Extract every unique project exactly once.
+
+        Projects may appear anywhere in the resume.
+
+        Do not assume a project only appears under a "Projects" heading.
+
+        Do not extract employment history, job responsibilities, education history, certifications, awards, publications, patents, or other achievements.
+
+        Extract only standalone projects.
+
+        For each project extract:
+
+        - name
+        - short description
+        - technologies if explicitly mentioned
+        - links if present
+
+        ----------------------------------------------------
+        
+
         licenses
 
         Government-issued or professional licenses or authorizations required to practice a profession.
@@ -129,13 +173,36 @@ remainingDetails_agent_prompt = ChatPromptTemplate.from_messages([
 
         achievements
 
-        Significant accomplishments,
-        recognitions,
-        competitive rankings,
-        published research,
-        patents,
-        scholarships,
-        or notable professional accomplishments.
+        Extract significant professional accomplishments and contributions.
+
+        Use semantic understanding rather than section titles or keywords.
+
+        Determine the professional meaning of each item from its content and context.
+
+        If an item represents a notable professional accomplishment or contribution,
+        include it under achievements even if it appears under an unexpected section title.
+
+        Examples include but are not limited to:
+
+        • patents
+        • published works
+        • books
+        • research
+        • journal or conference publications
+        • scholarships
+        • competitive rankings
+        • open-source contributions
+        • industry recognition
+        • notable technical or professional contributions
+
+        The examples above are illustrative, not exhaustive.
+
+        Do not rely on explicit section titles or keyword matching.
+
+        Instead classify items according to their semantic meaning and professional significance.
+
+        When the same accomplishment appears multiple times in different sections,
+        extract it only once and preserve the richer, more detailed version.
 
         ----------------------------------------------------
 
@@ -212,6 +279,10 @@ remainingDetails_agent_prompt = ChatPromptTemplate.from_messages([
 
         • Awards and achievements are classified appropriately.
 
+        • Publications, research papers, books, patents and similar professional contributions are classified under achievements.
+
+        • Do not create categories that are not defined in the output schema.
+
         • Every required field exists.
 
         • No contact, education or work experience information has been extracted.
@@ -246,7 +317,39 @@ remainingDetails_agent_prompt = ChatPromptTemplate.from_messages([
                 list[string] | null
 
             achievements:
-                list[string] | null
+                list[object] | null
+
+                    type:
+                        Concise semantic category describing the accomplishment.
+
+                        Infer this from the meaning of the content.
+
+                        Examples include:
+                        Patent
+                        Book
+                        Publication
+                        Research Paper
+                        Conference Paper
+                        Technical Article
+                        Open Source Contribution
+                        Award
+                        Scholarship
+                        Educational Content
+                        Industry Recognition
+                        or another appropriate professional category.
+
+                    title:
+                        Use the official title whenever available.
+
+                        Otherwise generate a short semantic title that best identifies
+                        the accomplishment.
+
+                        Do not copy an entire sentence.
+
+                    details:
+                        Preserve important supporting information such as patent numbers,
+                        publication information, ISBN, issuer, impact, metrics,
+                        recognition or other relevant context.
 
             training:
                 list[string] | null

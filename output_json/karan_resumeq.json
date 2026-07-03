@@ -1,0 +1,300 @@
+{
+    "contact_information": {
+        "name": "KARAN PRATAP SINGH",
+        "phone_numbers": [
+            "(415) 602-9452"
+        ],
+        "email_addresses": [
+            "contact@karanpratapsingh.com"
+        ],
+        "locations": [
+            "San Francisco, CA"
+        ],
+        "websites": [
+            "karanpratapsingh.com"
+        ],
+        "github": "github.com/karanpratapsingh",
+        "linkedin": "linkedin.com/karan99",
+        "addresses": [],
+        "portfolio": [],
+        "confidence_score": 1.0,
+        "security": {
+            "prompt_injection_detected": false,
+            "reason": "No malicious or instruction-like content detected in the resume."
+        }
+    },
+    "work_experience": {
+        "work_experience": [
+            {
+                "company": "Apple Inc.",
+                "employment_title": "Software Engineer",
+                "dates": {
+                    "start": "02/05/2024",
+                    "end": "Present"
+                },
+                "total_years": 2.3,
+                "location": "Cupertino, CA",
+                "details": [],
+                "links": []
+            },
+            {
+                "company": "The Guardian Life Insurance Company of America",
+                "employment_title": "Senior Software Engineer",
+                "dates": {
+                    "start": "05/03/2023",
+                    "end": "01/26/2024"
+                },
+                "total_years": 0.8,
+                "location": "Holmdel, NJ",
+                "details": [
+                    "Developed features for Guardian Anytime web app leveraging React.js and Node.js serving over 4M users.",
+                    "Migrated legacy Java SOAP APIs to RESTful APIs using Spring Boot ensuring robust code quality.",
+                    "Improved reliability and maintainability of React.js application by increasing test coverage by 12%."
+                ],
+                "links": []
+            },
+            {
+                "company": "Curebase",
+                "employment_title": "Senior Engineer",
+                "dates": {
+                    "start": "12/07/2020",
+                    "end": "05/13/2023"
+                },
+                "total_years": 2.4,
+                "location": "San Francisco, CA",
+                "details": [
+                    "Designed scalable REST and GraphQL APIs using TypeScript, Node.js, Redis, and PostgreSQL.",
+                    "Led initiative for codebase migration to TypeScript, reducing cost and API latency by 50%.",
+                    "Built fault-tolerant, horizontally scalable multi-tenancy for core SaaS product leveraging AWS (ALB, ECS, S3, RDS, SQS, DynamoDB) with a focus on security, GDPR, and HIPAA compliance.",
+                    "Utilized Golang, Python, and Terraform to develop business-critical internal tools and simplify SDLC."
+                ],
+                "links": []
+            },
+            {
+                "company": "Quotient Inc.",
+                "employment_title": "Software Developer",
+                "dates": {
+                    "start": "05/26/2020",
+                    "end": "01/31/2021"
+                },
+                "total_years": 0.7,
+                "location": "Maryland, USA (Remote)",
+                "details": [
+                    "Created a digital asset management platform using React, TypeScript, Node.js, and GraphQL.",
+                    "Implemented terabyte-scale data ingestion and streaming with Node.js for over 150 million artifacts.",
+                    "Designed end-to-end GraphQL data layer and client-side enterprise search solution with React.",
+                    "Optimized production CI/CD pipeline using Docker multi-stage builds, reducing container size by 80%."
+                ],
+                "links": []
+            },
+            {
+                "company": "Stewards",
+                "employment_title": "Software Developer",
+                "dates": {
+                    "start": "08/17/2019",
+                    "end": "06/07/2020"
+                },
+                "total_years": 0.8,
+                "location": "London, UK (Remote)",
+                "details": [
+                    "Implemented event-driven food delivery mobile application with React Native.",
+                    "Consolidated internal sales and custom B2B integrations with React and Node.js.",
+                    "Edge-optimized GraphQL API utilizing Google Cloud CDN, increasing customer retention by 60%."
+                ],
+                "links": []
+            }
+        ],
+        "total_experience": 7.0,
+        "confidence_score": 0.98,
+        "security": {
+            "prompt_injection_detected": false,
+            "reason": ""
+        }
+    },
+    "education": {
+        "education": [
+            {
+                "education_title": "Bachelors of Technology, Computer Science and Engineering",
+                "institution": "SRM Institute of Science and Technology",
+                "dates": {
+                    "start": "2017",
+                    "end": "2021"
+                },
+                "academic_result": "",
+                "location": "Delhi NCR, India"
+            }
+        ],
+        "confidence_score": 1.0,
+        "security": {
+            "prompt_injection_detected": false,
+            "reason": ""
+        }
+    },
+    "professional_qualifications": {
+        "professional_qualifications": {
+            "technical_skills": [
+                "Golang",
+                "Python",
+                "TypeScript",
+                "JavaScript",
+                "Java",
+                "PostgreSQL",
+                "Redis",
+                "GraphQL",
+                "Express.js",
+                "Django",
+                "Flask",
+                "FastAPI",
+                "Spring Boot",
+                "React.js",
+                "Next.js",
+                "Docker",
+                "Kubernetes",
+                "Terraform",
+                "Pulumi",
+                "Jenkins",
+                "Amazon Web Services (AWS)",
+                "Google Cloud Platform (GCP)",
+                "Node.js",
+                "React Native",
+                "AWS (ALB, ECS, S3, RDS, SQS, DynamoDB)",
+                "Google Cloud CDN"
+            ],
+            "soft_skills": [],
+            "expertise": [
+                "software security",
+                "software delivery pipelines",
+                "continuous automated threat modeling",
+                "distributed systems",
+                "microservices",
+                "software architecture",
+                "DevOps",
+                "multi-tenancy",
+                "GDPR compliance",
+                "HIPAA compliance",
+                "terabyte-scale data ingestion and streaming",
+                "event-driven systems",
+                "GraphQL data layer design",
+                "enterprise search solutions",
+                "CI/CD pipeline optimization",
+                "edge-optimized APIs"
+            ],
+            "languages": [],
+            "certifications": [],
+            "licenses": [],
+            "professional_affiliations": [],
+            "awards": [],
+            "achievements": [
+                {
+                    "type": "Patent",
+                    "title": "System and method for defense in depth of one or more software delivery pipelines",
+                    "details": [
+                        "US Patent Application No. 18373596",
+                        "Filed September 27, 2023",
+                        "Co-authored with Manas Singh et al."
+                    ]
+                },
+                {
+                    "type": "Patent",
+                    "title": "System and method for continuous automated threat modeling",
+                    "details": [
+                        "US Patent Application No. 18230253",
+                        "Filed August 4, 2023",
+                        "Co-authored with Manas Singh et al."
+                    ]
+                },
+                {
+                    "type": "Book",
+                    "title": "Learn Go",
+                    "details": [
+                        "Published January 2023",
+                        "ISBN 979-8-9883975-4-0"
+                    ]
+                },
+                {
+                    "type": "Book",
+                    "title": "System Design",
+                    "details": [
+                        "Published August 2022",
+                        "ISBN 979-8-9883975-8-8"
+                    ]
+                },
+                {
+                    "type": "Open Source Contribution",
+                    "title": "React Native v0.60 contribution",
+                    "details": [
+                        "Acknowledged by Meta"
+                    ]
+                },
+                {
+                    "type": "Industry Recognition",
+                    "title": "System Design repository",
+                    "details": [
+                        "Ranked among GitHub’s top 500 global repositories",
+                        "Over 38K stars",
+                        "40K monthly views"
+                    ]
+                },
+                {
+                    "type": "Publication",
+                    "title": "50+ technical articles on software engineering",
+                    "details": [
+                        "Published on Medium and Dev.to",
+                        "Reached over 2 million views",
+                        "Topics: distributed systems, microservices, software architecture, DevOps"
+                    ]
+                },
+                {
+                    "type": "Educational Content",
+                    "title": "YouTube channel on software engineering",
+                    "details": [
+                        "Produced educational tutorials",
+                        "Reached 70K+ developers globally"
+                    ]
+                }
+            ],
+            "projects": [
+                {
+                    "name": "ScaleETL",
+                    "description": "High-performance CLI for partitioning, transforming, loading, and searching CSV datasets up to 1 billion rows.",
+                    "technologies": [],
+                    "links": []
+                },
+                {
+                    "name": "Preview Environments",
+                    "description": "On-demand ephemeral, secure, and isolated AWS infrastructure to accelerate early Product and QA collaboration and improve cross-team visibility.",
+                    "technologies": [
+                        "AWS"
+                    ],
+                    "links": []
+                },
+                {
+                    "name": "HyperTrade",
+                    "description": "Distributed system for automated cryptocurrency trading across multiple exchanges.",
+                    "technologies": [],
+                    "links": []
+                },
+                {
+                    "name": "Full Stack Starter Kit",
+                    "description": "Scalable, GraphQL first template used by 1200+ developers.",
+                    "technologies": [
+                        "GraphQL"
+                    ],
+                    "links": []
+                },
+                {
+                    "name": "Proximity",
+                    "description": "Privacy-focused, open-source social media platform with over 10,000 users.",
+                    "technologies": [],
+                    "links": []
+                }
+            ],
+            "training": []
+        },
+        "confidence_score": 0.98,
+        "security": {
+            "prompt_injection_detected": false,
+            "reason": ""
+        }
+    }
+}

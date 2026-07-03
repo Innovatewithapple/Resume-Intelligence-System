@@ -17,7 +17,8 @@ load_dotenv()
 
 nvidia_API_key = os.getenv("NVDIA_API_Key")
 base_url='https://integrate.api.nvidia.com/v1/chat/completions'
-model='meta/llama-4-maverick-17b-128e-instruct'
+model='qwen/qwen3-next-80b-a3b-instruct'
+backup_Model='meta/llama-4-maverick-17b-128e-instruct'
 
 CONTACT_MAX_TOKENS = 300
 

@@ -3,7 +3,7 @@ import time
 import json
 from langgraph.graph import StateGraph, START,END
 from ApiRequests import extract_text_from_pdf_to_markdown, contact_details_Node, work_experience_details_Node, education_details_Node, remaining_details_Node
-from state_services import GraphState,ResumeParserOutput
+from state_services import GraphState
 from pathlib import Path
 
 app_start = time.time()
@@ -31,28 +31,75 @@ builder.add_edge('remaining_details_Node',END)
 
 graph = builder.compile()
 
+# async def process_resume(pdf: Path):
+#     resume_start = time.perf_counter()
+#     try:
+#         print(f"🚀 Started : {pdf.name}")
+
+#         result = await graph.ainvoke({"path": str(pdf)})
+
+#         resume = ResumeParserOutput(
+#             contact_information=result["resume_contact_info"],
+#             work_experience=result["resume_work_experience_info"],
+#             education=result["resume_education_info"],
+#             professional_qualifications=result["resume_remaining_info"],
+#         )
+
+#         output_dir = Path("output_json")
+#         output_dir.mkdir(exist_ok=True)
+
+#         output_file = output_dir / f"{pdf.stem}.json"
+
+#         output_file.write_text(
+#             resume.model_dump_json(indent=4),
+#             encoding="utf-8"
+#         )
+#         elapsed = time.perf_counter() - resume_start
+#         print(f"✅ Finished : {pdf.name} ({elapsed:.2f}s)")
+
+#     except Exception as e:
+#         elapsed = time.perf_counter() - resume_start
+#         print(f"❌ Failed : {pdf.name} ({elapsed:.2f}s)")
+#         print(e)
+
+
+#     resume_dir = Path("/Users/himanshuvyas/Desktop/tempvc/testresumes/parallel")
+
+# async def main():
+#     batch_start = time.perf_counter()
+#     resume_dir = Path("/Users/himanshuvyas/Desktop/tempvc/testresumes/parallel")
+#     tasks = [
+#         process_resume(pdf)
+#         for pdf in resume_dir.glob("*.pdf")
+#     ]
+#     await asyncio.gather(*tasks)
+#     print(
+#         f"\n🎉 All resumes completed in "
+#         f"{time.perf_counter()-batch_start:.2f}s"
+#     )
 async def main():
-    contact = await graph.ainvoke({"path":"/Users/himanshuvyas/Desktop/tempvc/testresumes/White Simple Student CV Resume.pdf"})
-    result = contact
-    final_output = ResumeParserOutput(
-        contact_information=result["resume_contact_info"],
-        work_experience=result["resume_work_experience_info"],
-        education=result["resume_education_info"],
-        professional_qualifications=result["resume_remaining_info"]
-    )
-    if result is None:
-        print(f"❌ Failed")
-    print(final_output.model_dump_json(indent=4))
-    # resume_dir = Path("/Users/himanshuvyas/Desktop/tempvc/testresumes")
-    # for pdf in resume_dir.glob("*.pdf"):
-    #     print(f"\n\nProcessing: {pdf.name}")
-    #     contact = await graph.ainvoke({"path":str(pdf)})
-    #     result = contact['resume_education_info']
-        
-    #     if result is None:
-    #         print(f"❌ Failed: {pdf.name}")
-    #         continue
-    #     print(json.dumps(result.model_dump(), indent=4)) 
+    try:
+        resume_path = "/Users/himanshuvyas/Desktop/tempvc/testresumes/karan_resume.pdf"
+        result = await graph.ainvoke({"path": resume_path})
+        output_dir = Path("output_json")
+        output_dir.mkdir(exist_ok=True)
+        final_output = {
+            "contact_information": result["resume_contact_info"].model_dump(),
+            "work_experience": result["resume_work_experience_info"].model_dump(),
+            "education": result["resume_education_info"].model_dump(),
+            "professional_qualifications": result["resume_remaining_info"].model_dump()
+        }
+
+        output_file = output_dir / Path(resume_path).with_suffix(".json").name
+
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(final_output, f, indent=4, ensure_ascii=False)
+
+        print("✅ JSON Saved")
+
+    except Exception as e:
+        print("❌ Server is busy. Please try again later.")
+        print(f"Actual Error: {e}")    
 
 if __name__ == "__main__":
     asyncio.run(main())

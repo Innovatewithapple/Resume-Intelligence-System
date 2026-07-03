@@ -23,8 +23,7 @@ class contact_info(BaseModel):
     addresses:list[str] | None
     portfolio:list[str] | None
 
-class resume_contactInfo_output(BaseModel):
-    contact_information:contact_info | None
+class resume_contactInfo_output(contact_info):
     confidence_score:float | None
     security:Security | None
 
@@ -64,6 +63,17 @@ class resume_educationInfo_output(BaseModel):
 
 #--------Remaining Info------!
 
+class Achievement(BaseModel):
+    type:str | None
+    title:str | None
+    details: list[str] | None
+
+class Project(BaseModel):
+    name: str | None
+    description: str | None
+    technologies: list[str] | None
+    links: list[str] | None   
+
 class professional_info(BaseModel):
     technical_skills:list[str]
     soft_skills:list[str]
@@ -73,7 +83,8 @@ class professional_info(BaseModel):
     licenses:list[str]
     professional_affiliations:list[str]
     awards:list[str]
-    achievements:list[str]
+    achievements:list[Achievement] | None
+    projects: list[Project] | None
     training:list[str]
 
 
@@ -82,12 +93,6 @@ class professional_qualificationsInfo_output(BaseModel):
     confidence_score:float | None
     security:Security | None
 
-
-class ResumeParserOutput(BaseModel):
-    contact_information: resume_contactInfo_output | None
-    work_experience: resume_work_experienceInfo_output | None
-    education: resume_educationInfo_output | None
-    professional_qualifications: professional_qualificationsInfo_output | None
 
 class GraphState(TypedDict):
     path:str
