@@ -5,7 +5,6 @@ from pathlib import Path
 from state_services import GraphState
 from langgraph.graph import StateGraph, START,END
 from ApiRequests import candidate_evaluation_details_Node
-from jds.sample import jd
 
 app_start = time.time()
 
