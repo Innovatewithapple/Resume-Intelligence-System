@@ -1,5 +1,7 @@
 # Virtual Environment
 .venv/
+venv/
+env/
 
 # Python cache
 __pycache__/
@@ -15,6 +17,7 @@ __pycache__/
 
 # VS Code
 .vscode/
+*.code-workspace
 
 # macOS
 .DS_Store
@@ -25,4 +28,26 @@ __pycache__/
 # Logs
 *.log
 
-*.code-workspace
+# Generated files
+output_json/
+evaluation_output/
+uploads/
+testresumes/
+
+# Pytest
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/

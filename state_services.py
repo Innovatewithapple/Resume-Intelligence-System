@@ -1,6 +1,6 @@
 from numpy import double
 from pydantic import BaseModel
-from typing import TypedDict
+from typing import TypedDict,Literal
 
 class Security(BaseModel):
     prompt_injection_detected: bool
@@ -102,3 +102,30 @@ class GraphState(TypedDict):
     resume_remaining_info:dict
     resume_info:dict
     resume_markdown:str
+    candidate_evaluation:dict
+    resume_json: dict
+    job_description: str    
+
+
+#-------Candidate Evaluation----------!
+
+class SkillAnalysis(BaseModel):
+    skill: str
+    status: Literal["matched", "transferable", "missing"]
+    importance: Literal["essential", "preferred", "optional"]
+
+class candidate_evaluationInfo_output(BaseModel):
+
+    overall_match_score: int
+
+    recommendation: str
+
+    summary: str
+
+    skill_analysis: list[SkillAnalysis] | None
+
+    strengths: list[str] | None
+
+    concerns: list[str] | None
+
+    confidence_score: float

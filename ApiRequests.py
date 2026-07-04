@@ -1,14 +1,18 @@
 from tracemalloc import start
-
+import json
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
 import os
+
+from pydantic import ValidationError
 from Prompts.contactPrompt import contact_info_prompt
 from Prompts.experiencePrompt import experience_agent_prompt
 from Prompts.educationPrompt import education_details_prompt
 from Prompts.remainingDetailsPrompt import remainingDetails_agent_prompt
-from state_services import GraphState, resume_contactInfo_output,resume_work_experienceInfo_output,resume_educationInfo_output,professional_qualificationsInfo_output
+from Prompts.candidateEvaluationPrompt import candidateevaluation_agent_prompt
+from Prompts.tempprompt import tempprompt
+from state_services import GraphState, resume_contactInfo_output,resume_work_experienceInfo_output,resume_educationInfo_output,professional_qualificationsInfo_output,candidate_evaluationInfo_output
 import time
 import pymupdf4llm
 from datetime import date
@@ -28,12 +32,15 @@ WORK_EXPERIENCE_MAX_TOKENS = 1500
 
 PROFESSIONAL_QUALIFICATIONS_MAX_TOKENS = 2000
 
+EVALUATION_MAX_TOKENS = 1500
+
 TEMPERATURE=0.0
 
 CONTACT_CHAT_MODEL = ChatNVIDIA(model=model,nvidia_api_key=nvidia_API_key,temperature=TEMPERATURE,max_completion_tokens=CONTACT_MAX_TOKENS,top_p=0.9)
 EDUCATION_CHAT_MODEL = ChatNVIDIA(model=model,nvidia_api_key=nvidia_API_key,temperature=TEMPERATURE,max_completion_tokens=EDUCATION_MAX_TOKENS,top_p=0.9)
 WORK_EXPERIENCE_CHAT_MODEL = ChatNVIDIA(model=model,nvidia_api_key=nvidia_API_key,temperature=TEMPERATURE,max_completion_tokens=WORK_EXPERIENCE_MAX_TOKENS,top_p=0.9)
 REMAINING_DETAILS_CHAT_MODEL = ChatNVIDIA(model=model,nvidia_api_key=nvidia_API_key,temperature=TEMPERATURE,max_completion_tokens=PROFESSIONAL_QUALIFICATIONS_MAX_TOKENS,top_p=0.9)
+EVALUATION_CHAT_MODEL = ChatNVIDIA(model=model,nvidia_api_key=nvidia_API_key,temperature=TEMPERATURE,max_completion_tokens=EVALUATION_MAX_TOKENS,top_p=0.9)
 
 parser = StrOutputParser()
 today = date.today().isoformat()
@@ -121,4 +128,46 @@ async def remaining_details_Node(state:GraphState):
     print(f"remaining_details_Info_LLm_Time: {time.perf_counter()-start:.2f}s")
     return {
         "resume_remaining_info": result
+    }
+
+async def candidate_evaluation_details_Node(state:GraphState):
+    start = time.perf_counter()
+    evaluation_chain=(
+        candidateevaluation_agent_prompt
+        |EVALUATION_CHAT_MODEL
+    )
+    try:
+        result = await evaluation_chain.ainvoke(
+            {
+                "resume_json": state["resume_json"],
+                "job_description": state["job_description"],
+            }
+        )
+        with open("evaluation_raw.txt", "w", encoding="utf-8") as f:
+            f.write(result.content)
+
+        print(result.content)
+        raw = json.loads(result.content)
+        validated = candidate_evaluationInfo_output.model_validate(raw)
+
+    except ValidationError as e:
+        print("\n========= PYDANTIC VALIDATION ERROR =========")
+        print(e)
+        print("============================================\n")
+        return {"candidate_evaluation": None}
+
+    except Exception as e:
+
+        import traceback
+
+        print("\n========= GENERAL ERROR =========")
+        traceback.print_exc()
+        print("=================================\n")
+
+        return {"candidate_evaluation": None}
+
+    print(f"candidate_evaluation_Info_LLM_Time: {time.perf_counter()-start:.2f}s")
+
+    return {
+        "candidate_evaluation": validated
     }
