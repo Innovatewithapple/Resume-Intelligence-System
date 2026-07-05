@@ -23,7 +23,9 @@ resume_file = st.file_uploader(
     "Upload Resume (PDF)"
 )
 
-st.write("Resume Object:", resume_file)
+# st.write("Resume Object:", resume_file)
+st.write(type(resume_file))
+st.write(resume_file)
 
 if resume_file is not None:
     st.success("✅ Upload received by Streamlit")
