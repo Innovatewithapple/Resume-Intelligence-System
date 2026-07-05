@@ -14,37 +14,10 @@ st.caption("Semantic Resume Parsing & Candidate Evaluation")
 
 st.divider()
 
-# resume_file = st.file_uploader(
-#     "Upload Resume (PDF)",
-#     type=["pdf"]
-# )
-
-# resume_file = st.file_uploader(
-#     "Upload Resume (PDF)"
-# )
-
-# # st.write("Resume Object:", resume_file)
-# st.write(type(resume_file))
-# st.write(resume_file)
-
 resume_file = st.file_uploader(
     "Upload Resume (PDF)",
-    type=["pdf"],
-    key="resume"
+    type=["pdf"]
 )
-
-st.write("resume_file =", resume_file)
-
-if resume_file:
-    st.success("File received!")
-    st.write(resume_file.name)
-    st.write(resume_file.size)
-
-if resume_file is not None:
-    st.success("✅ Upload received by Streamlit")
-    st.write("File Name:", resume_file.name)
-    st.write("File Size:", resume_file.size)
-    st.write("File Type:", resume_file.type)
 
 job_description = st.text_area(
     "Job Description",
