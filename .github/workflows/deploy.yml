@@ -1,33 +1,18 @@
-name: Deploy to Hugging Face
+run: |
+  git config --global user.email "github-actions@github.com"
+  git config --global user.name "GitHub Actions"
 
-on:
-  push:
-    branches:
-      - main
+  git clone https://oauth2:${HF_TOKEN}@huggingface.co/spaces/kadmsdfgsdfg/Resume-Intelligence-Analyser /tmp/hf
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  rsync -av --delete \
+    --exclude ".git" \
+    --exclude ".github" \
+    ./ /tmp/hf/
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  cd /tmp/hf
 
-      - name: Push to Hugging Face
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "GitHub Actions"
+  git add .
 
-          git clone https://oauth2:${HF_TOKEN}@huggingface.co/spaces/kadmsdfgsdfg/Resume-Intelligence-Analyser hf_space
+  git commit -m "Auto Deploy" || echo "No changes"
 
-          rsync -av --delete --exclude ".git" ./ hf_space/
-
-          cd hf_space
-
-          git add .
-
-          git commit -m "Auto Deploy from GitHub" || echo "No changes"
-
-          git push
+  git push
