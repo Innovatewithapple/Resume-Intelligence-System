@@ -36,6 +36,7 @@ analyze = st.button(
 
 if analyze:
     st.session_state.processing = True
+    st.rerun()
 
 if st.session_state.processing:
 
