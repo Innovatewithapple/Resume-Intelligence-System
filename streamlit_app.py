@@ -25,29 +25,26 @@ job_description = st.text_area(
     placeholder="Paste the complete Job Description here..."
 )
 
-if "processing" not in st.session_state:
-    st.session_state.processing = False
+# if "processing" not in st.session_state:
+#     st.session_state.processing = False
 
-analyze = st.button(
+button_placeholder = st.empty()
+analyze = button_placeholder.button(
     "Analyze Resume",
-    use_container_width=True,
-    disabled=st.session_state.processing
+    use_container_width=True
 )
 
 if analyze:
-    st.session_state.processing = True
-    st.rerun()
-
-if st.session_state.processing:
+    # Immediately swap in a disabled button — no session_state needed
 
     if resume_file is None:
         st.error("Please upload a resume.")
-        st.session_state.processing = False
         st.stop()
 
-    if not job_description.strip():
-        st.error("Please enter a Job Description.")
-        st.session_state.processing = False
+    job_description = job_description.strip()
+
+    if len(job_description.split()) < 20:
+        st.error("Please provide a valid Job Description (minimum 20 words).")
         st.stop()
 
     with st.spinner("Analyzing Resume..."):
@@ -69,8 +66,6 @@ if st.session_state.processing:
             files=files,
             data=data
         )
-    st.session_state.processing = False
-    
 
     if response.status_code != 200:
         st.error("Server Error")
@@ -79,7 +74,13 @@ if st.session_state.processing:
 
     result = response.json()
 
-    evaluation = result["candidate_evaluation"]
+    evaluation = result.get("candidate_evaluation")
+
+    if evaluation is None:
+        st.error(
+            "Unable to evaluate this resume. Please provide a more detailed Job Description."
+        )
+        st.stop()
 
     st.success(
         f"Completed in {result['processing_time']} seconds"

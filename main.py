@@ -1,3 +1,4 @@
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, UploadFile, File, Form
 from pathlib import Path
 import shutil
@@ -9,6 +10,14 @@ from candidate_evaluation import evaluate_candidate
 app = FastAPI(
     title="Resume Intelligence API",
     version="1.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
