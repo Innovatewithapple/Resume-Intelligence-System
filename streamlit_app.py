@@ -25,19 +25,28 @@ job_description = st.text_area(
     placeholder="Paste the complete Job Description here..."
 )
 
+if "processing" not in st.session_state:
+    st.session_state.processing = False
+
 analyze = st.button(
     "Analyze Resume",
-    use_container_width=True
+    use_container_width=True,
+    disabled=st.session_state.processing
 )
 
 if analyze:
+    st.session_state.processing = True
+
+if st.session_state.processing:
 
     if resume_file is None:
         st.error("Please upload a resume.")
+        st.session_state.processing = False
         st.stop()
 
     if not job_description.strip():
         st.error("Please enter a Job Description.")
+        st.session_state.processing = False
         st.stop()
 
     with st.spinner("Analyzing Resume..."):
@@ -59,6 +68,8 @@ if analyze:
             files=files,
             data=data
         )
+    st.session_state.processing = False
+    
 
     if response.status_code != 200:
         st.error("Server Error")
