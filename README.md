@@ -9,3 +9,4 @@ pinned: false
 ---
 
 # Resume Intelligence Analyser
+Last updated: July 10
