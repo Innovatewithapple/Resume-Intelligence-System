@@ -31,6 +31,9 @@ builder.add_edge('remaining_details_Node',END)
 
 graph = builder.compile()
 
+def safe_dump(value):
+    return value.model_dump() if value else {}
+
 async def parse_resume(resume_path: str):
     try:
         result = await graph.ainvoke(
@@ -43,10 +46,10 @@ async def parse_resume(resume_path: str):
             raise ValueError("Resume parser returned None.")
 
         final_output = {
-            "contact_information": result["resume_contact_info"].model_dump(),
-            "work_experience": result["resume_work_experience_info"].model_dump(),
-            "education": result["resume_education_info"].model_dump(),
-            "professional_qualifications": result["resume_remaining_info"].model_dump(),
+            "contact_information": safe_dump(result.get("resume_contact_info")),
+            "work_experience": safe_dump(result.get("resume_work_experience_info")),
+            "education": safe_dump(result.get("resume_education_info")),
+            "professional_qualifications": safe_dump(result.get("resume_remaining_info")),
         }
 
         output_dir = Path("output_json")
