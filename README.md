@@ -18,7 +18,7 @@ This project demonstrates an end-to-end AI recruitment workflow built with **Lan
 
 ## 🚀 Live Demo
 
-[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-yellow)](https://huggingface.co/spaces/Innovatewithapple/Resume-Intelligence-System)
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-yellow)](https://huggingface.co/spaces/Innovatewithapple/Resume-Intelligence-Analyser)
 
 [![GitHub](https://img.shields.io/badge/GitHub-Source%20Code-181717?logo=github)](https://github.com/Innovatewithapple/Resume-Intelligence-System)
 
